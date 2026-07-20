@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+
+@layer base {
+  html {
+    font-family: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, sans-serif;
+    background-color: #ECEEEE;
+    color: rgb(12, 12, 12);
+    scroll-behavior: smooth;
+    font-weight: 500;
+    font-style: normal;
+  }
+  body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: inherit;
+    font-weight: 500;
+    font-style: normal;
+    color: rgb(12, 12, 12);
+    background-color: #ECEEEE;
+  }
+  h1, .main-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, sans-serif !important;
+    font-size: 72px !important;
+    line-height: 76px !important;
+    font-weight: 500 !important;
+    color: rgb(12, 12, 12) !important;
+    font-style: normal !important;
+  }
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.keyword-highlight {
+  font-family: __Instrument_Serif_bbcc58, Georgia, serif !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: 72px !important;
+  line-height: 76px !important;
+  color: rgb(61, 49, 232) !important;
+}
+
+.black-grid-background {
+  position: relative;
+}
+
+.black-grid-background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  mask-image: radial-gradient(circle, black 40%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle, black 40%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
