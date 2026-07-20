@@ -22,11 +22,17 @@
   }
   h1, .main-title {
     font-family: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, sans-serif !important;
-    font-size: 72px !important;
-    line-height: 76px !important;
+    font-size: 38px !important;
+    line-height: 42px !important;
     font-weight: 500 !important;
     color: rgb(12, 12, 12) !important;
     font-style: normal !important;
+  }
+  @media (min-width: 768px) {
+    h1, .main-title {
+      font-size: 72px !important;
+      line-height: 76px !important;
+    }
   }
 }
 
@@ -41,9 +47,15 @@
   font-family: __Instrument_Serif_bbcc58, Georgia, serif !important;
   font-style: italic !important;
   font-weight: 400 !important;
-  font-size: 72px !important;
-  line-height: 76px !important;
+  font-size: 42px !important;
+  line-height: 46px !important;
   color: rgb(61, 49, 232) !important;
+}
+@media (min-width: 768px) {
+  .keyword-highlight {
+    font-size: 72px !important;
+    line-height: 76px !important;
+  }
 }
 
 .black-grid-background {
