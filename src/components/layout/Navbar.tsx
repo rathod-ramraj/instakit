@@ -1,11 +1,46 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { motion } from 'framer-motion';
+import toast from 'react-hot-toast';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstallable, setIsInstallable] = useState(false);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      // Prevent the default mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      setDeferredPrompt(e);
+      // Update UI notify the user they can install the PWA
+      setIsInstallable(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    window.addEventListener('appinstalled', () => {
+      setDeferredPrompt(null);
+      setIsInstallable(false);
+      toast.success('InstaKit installed successfully!');
+    });
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    setDeferredPrompt(null);
+    setIsInstallable(false);
+  };
 
   const links = [
     { name: 'Home', path: '/' },
@@ -56,6 +91,11 @@ const Navbar = () => {
             </div>
             
             <div className="hidden md:flex items-center">
+              {isInstallable && (
+                <button onClick={handleInstallClick} className="mr-2.5 px-4 py-2 text-sm font-medium text-black border border-gray-200 bg-white rounded-full hover:bg-gray-50 hover:border-gray-300 transition-transform hover:scale-105 active:scale-95 cursor-pointer">
+                  Install App
+                </button>
+              )}
               <Link to="/contact" className="px-5 py-2 text-sm font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-transform hover:scale-105 active:scale-95">
                 Contact Us
               </Link>
@@ -92,6 +132,11 @@ const Navbar = () => {
                     {link.name}
                   </Link>
                 )
+              )}
+              {isInstallable && (
+                <button onClick={() => { setIsOpen(false); handleInstallClick(); }} className="block w-full mt-2 px-4 py-3 rounded-xl text-center text-base font-medium text-black border border-gray-200 bg-white hover:bg-gray-50 transition-colors cursor-pointer">
+                  Install App
+                </button>
               )}
               <Link to="/contact" onClick={() => setIsOpen(false)} className="block mt-4 px-4 py-3 rounded-xl text-center text-base font-medium text-white bg-black">
                 Contact Us

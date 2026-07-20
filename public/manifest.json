@@ -1,0 +1,17 @@
+{
+  "name": "InstaKit - Instagram Downloader & AI Hashtag Generator",
+  "short_name": "InstaKit",
+  "description": "Minimalist, ultra-fast toolkit to download Instagram media and generate AI hashtags.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ECEEEE",
+  "theme_color": "#121212",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

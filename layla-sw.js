@@ -36,3 +36,7 @@ self.addEventListener("notificationclick", (event) => {
     })
   );
 });
+
+self.addEventListener("fetch", (event) => {
+  // Empty listener satisfying progressive web app installability rules
+});
