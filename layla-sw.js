@@ -10,7 +10,6 @@ self.addEventListener("push", (event) => {
       actions.push({ action: id, title: String(a.label || "").slice(0, 24) });
       actionMap[id] = a.url;
     });
-    
   }
   const opts = {
     body: data.body || "",
